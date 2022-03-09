@@ -1,6 +1,6 @@
 import contextlib
-from django.shortcuts import render
-from .models import Pen
+from django.shortcuts import render, redirect
+from .models import Pen, PenForm
 
 
 # Create your views here.
@@ -11,7 +11,37 @@ def index(request):
 
     context = {
         'pen_list': all_pens,
-        'page_title': "Fountain Pen Collection"
+        'page_title': "Fountain Pen Collection",
     }
 
     return render(request, "index.html", context)
+
+
+
+def edit_pen(request, pen_id=None):
+    if request.method == 'POST':
+
+        if pen_id is not None:
+            pen = Pen.objects.get(id=pen_id)
+            form = PenForm(request.POST, instance=pen)
+
+        else:
+            form = PenForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect(index)
+
+    else:
+        if pen_id is not None:
+            pen = Pen.objects.get(id=pen_id)
+            form = PenForm(instance=pen)
+        else:
+            form = PenForm()
+
+    context = {
+        'form': form,
+        'pen_id': pen_id,
+    }
+
+    return render(request, "edit_pen.html", context)

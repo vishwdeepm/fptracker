@@ -1,0 +1,16 @@
+body {
+  background: #D3ECA7;
+}
+
+.container{
+  background: #FFFFFF;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 25px;
+  height: 90%;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+}
