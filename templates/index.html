@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,13 +7,41 @@
         <title>Fountain Pen Tracker</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
     </head>
     <body>
-        <h2>This is Template</h2>
-       <p>This is para to learn HTML language </p>
-       
-        
-        <script src="" async defer></script>
+        <div class="container">
+        <h2>{{page_title}}</h2>
+        <div class="row">
+            <div class="three columns">
+            <p>Number of Pens:{{pen_list |length }}</p>
+            <table class="u-full-width">
+              <thead>
+                <tr>
+                    <th>Color</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Nib Size</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for pen in pen_list %}
+                  <tr>
+                    <td style="background-color:{{pen.color}};"></td>
+                    <td>{{pen.brand_name}}</td>
+                    <td>{{pen.model_name}}</td>
+                    <td>{{pen.nib_size}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            </div>
+            <div class="nine columns">
+            <script src="" async defer></script>
+            </div>
+        </div>
+        </div>
     </body>
 </html>

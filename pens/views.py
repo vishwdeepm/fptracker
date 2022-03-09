@@ -1,9 +1,17 @@
+import contextlib
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Pen
+
 
 # Create your views here.
 
 def index(request):
-    # process things, query the database, make calculations
 
-    return render(request, "index.html", {})
+    all_pens = Pen.objects.all()
+
+    context = {
+        'pen_list': all_pens,
+        'page_title': "Fountain Pen Collection"
+    }
+
+    return render(request, "index.html", context)
